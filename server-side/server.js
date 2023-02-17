@@ -6,11 +6,12 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const rootRoute = require('./routes/root');
 const { logger, logEvents } = require('./middleware/logger');
 const { errorHandler } = require('./middleware/errorHandler');
 const { corsOptions } = require('./configs/corsOptions');
 const connectDb = require('./configs/dbConn');
+const rootRoute = require('./routes/root');
+const userRoutes = require('./routes/userRoutes')
 
 const port = process.env.PORT || 3500;
 const app = express();
@@ -21,8 +22,10 @@ app.use(logger);
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
 app.use('/', express.static(path.join(__dirname, './public')));
 app.use('/', rootRoute);
+app.use('/user', userRoutes);
 app.all('*', (req, res) => {
   res.status(404);
 

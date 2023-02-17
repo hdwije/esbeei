@@ -13,19 +13,15 @@ const userSchema = new mongoose.Schema(
     salutation: {
       type: String,
       enum: ['Mr', 'Mrs', 'Ms'],
-      required: true,
     },
     firstName: {
       type: String,
-      required: true,
     },
     lastName: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
-      required: true,
     },
   },
   { timestamps: true },
